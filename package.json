@@ -1,10 +1,6 @@
 {
   "name": "simple-socket",
   "version": "1.0.0",
-  "engines": {
-    "node": "16.13.0",
-    "npm": "8.19.3"
-  },
   "description": "A simple socket.io example with Express",
   "main": "./server/app.js",
   "scripts": {
@@ -19,13 +15,12 @@
     "body-parser": "^1.20.2",
     "compression": "^1.7.4",
     "express": "^4.18.2",
-    "express-handlebars": "^7.0.4",
+    "express-handlebars": "^7.1.2",
     "serve-favicon": "^2.5.0"
   },
   "devDependencies": {
-    "eslint": "^8.37.0",
+    "eslint": "^8.53.0",
     "eslint-config-airbnb": "^19.0.4",
-    "eslint-plugin-import": "^2.27.5",
-    "nodemon": "^2.0.22"
+    "eslint-plugin-import": "^2.29.0"
   }
 }
