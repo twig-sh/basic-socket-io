@@ -5,8 +5,6 @@ const favicon = require('serve-favicon');
 const bodyParser = require('body-parser');
 const expressHandlebars = require('express-handlebars');
 
-const router = require('./router.js');
-
 const port = process.env.PORT || process.env.NODE_PORT || 3000;
 
 const app = express();
@@ -24,9 +22,34 @@ app.engine('handlebars', expressHandlebars.engine({
 app.set('view engine', 'handlebars');
 app.set('views', `${__dirname}/../views`);
 
+const http = require('http');
+const { Server } = require('socket.io');
+const router = require('./router.js');
+
 router(app);
 
-app.listen(port, (err) => {
+let io;
+
+const setupSockets = (app) => {
+  const server = http.createServer(app);
+  io = new Server(server);
+
+  io.on('connection', (socket) => {
+    console.log('connected!');
+
+    socket.on('news-response', (msg) => {
+      console.log('news-response', msg);
+    });
+
+    socket.emit('news', 'something');
+  });
+
+  return server;
+};
+
+const server = setupSockets(app);
+
+server.listen(port, (err) => {
   if (err) {
     throw err;
   }
